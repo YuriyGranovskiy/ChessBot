@@ -1,4 +1,4 @@
-module ChessBot.Entities.Board
+module ChessBot.Entities.Squares
 
 type SquareColor =
     | White
