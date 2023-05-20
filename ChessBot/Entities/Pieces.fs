@@ -1,5 +1,4 @@
 module ChessBot.Entities.Pieces
-open ChessBot.Entities.Squares
 
 type PieceColors =
     | White
@@ -13,9 +12,8 @@ type PieceTypes =
     | Queen
     | King
 
-type Piece(pieceType : PieceTypes, pieceColor : PieceColors, square: Square) =
+type Piece(pieceType : PieceTypes, pieceColor : PieceColors) =
     member this.PieceType = pieceType
-    member this.Square = square
     member this.PieceColor = pieceColor
     
-    member this.Describe() = $"This is %s{this.PieceColor.ToString()} %s{this.PieceType.ToString()} on %s{this.Square.Color.ToString()} square" 
+    member this.Describe() = $"This is a %s{this.PieceColor.ToString()} %s{this.PieceType.ToString()}" 
