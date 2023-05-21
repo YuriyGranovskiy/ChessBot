@@ -13,9 +13,9 @@ type ChessSquare(square: Square) =
 type ChessBoard() =
     let chessSquares : ChessSquare[,] = Array2D.zeroCreate 8 8
     
-    do for i = 0 to 7 do
-        for j = 0 to 7 do
-            chessSquares.[i, j] <- ChessSquare(Square(LanguagePrimitives.EnumOfValue (j + 1), LanguagePrimitives.EnumOfValue (i + 1)))
+    do for r = 0 to 7 do
+        for f = 0 to 7 do
+            chessSquares.[r, f] <- ChessSquare(Square(LanguagePrimitives.EnumOfValue (f + 1), LanguagePrimitives.EnumOfValue (r + 1)))
 
     let getRankIndexByCode(code:string) : int =        
         let ascii = code.[0] |> int 
@@ -33,6 +33,24 @@ type ChessBoard() =
         else
             raise ( System.ArgumentException($"Improper code {code}"))
 
+    let getLetterByPieceType(pieceType: PieceTypes, pieceColor: PieceColors) : string =
+        if pieceColor = PieceColors.White then
+            match pieceType with
+            | PieceTypes.Pawn -> "X"
+            | PieceTypes.Knight -> "N"
+            | PieceTypes.Bishop -> "B"
+            | PieceTypes.Rook -> "R"
+            | PieceTypes.Queen -> "Q"
+            | PieceTypes.King -> "K"
+        else
+            match pieceType with
+            | PieceTypes.Pawn -> "x"
+            | PieceTypes.Knight -> "n"
+            | PieceTypes.Bishop -> "b"
+            | PieceTypes.Rook -> "r"
+            | PieceTypes.Queen -> "q"
+            | PieceTypes.King -> "k"
+
     member this.ChessSquares = chessSquares    
     member this.getChessSquareByCode(code: string):ChessSquare =
         this.ChessSquares.[getFileIndexByCode(code), getRankIndexByCode(code)]
@@ -46,6 +64,20 @@ type ChessBoard() =
 
     member this.Init(code:string, piece:Option<Piece>) =
         this.getChessSquareByCode(code).Piece <- piece
+
+    member this.Print() =
+        printfn " --- --- --- --- --- --- --- ---"
+        for r = 0 to 7 do
+            printf "|"
+            for f = 0 to 7 do
+                let piece = this.ChessSquares.[7-r, f].Piece
+                let result = match piece with
+                                | Some p -> $" {getLetterByPieceType(p.PieceType, p.PieceColor)} "
+                                | None -> "   "
+                printf $"{result}|"
+            printfn ""
+            printfn " --- --- --- --- --- --- --- ---"
+                
 with static member Default =
         let defaultBoard = ChessBoard()
         defaultBoard.Init("a1", Some (Piece(PieceTypes.Rook, PieceColors.White)))

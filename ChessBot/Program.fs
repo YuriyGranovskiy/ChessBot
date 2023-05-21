@@ -8,8 +8,7 @@ let main args =
     
     let chessBoard = ChessBoard.Default
     
-    let description1 = chessBoard.DescribeSquare("d7")
-    let description2 = chessBoard.DescribeSquare("d6")
-    printfn $"%s{description1}"
-    printfn $"%s{description2}"
+    let description = chessBoard.DescribeSquare("d7")
+    printfn $"%s{description}"
+    chessBoard.Print()
     0
