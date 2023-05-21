@@ -9,6 +9,7 @@
         <Compile Include="Entities\Squares.fs" />
         <Compile Include="Entities\Pieces.fs" />
         <Compile Include="Entities\Board.fs" />
+        <Compile Include="Entities\Game.fs" />
         <Compile Include="Program.fs" />
         <Content Include="..\.gitignore">
           <Link>.gitignore</Link>
