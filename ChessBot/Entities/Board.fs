@@ -37,18 +37,18 @@ type ChessBoard() =
             | PieceTypes.King -> "k"
 
     member this.ChessSquares = chessSquares    
-    member this.getChessSquareByCode(code: string):ChessSquare =
+    member this.GetByCode(code: string):ChessSquare =
         this.ChessSquares.[GetFileIndexByChar(code[0]), GetRankIndexByChar(code[1])]
 
     member this.DescribeSquare(code: string): string =
-        let squareToDescribe = this.getChessSquareByCode(code)
+        let squareToDescribe = this.GetByCode(code)
         let color = $"%s{squareToDescribe.Square.Color.ToString()}"        
         match squareToDescribe.Piece with
         | Some p -> $"%s{p.Describe()} standing on a {color} square" 
         | None -> $"There is nothing on this {color} square"
 
     member this.Init(code:string, piece:Option<Piece>) =
-        this.getChessSquareByCode(code).Piece <- piece
+        this.GetByCode(code).Piece <- piece
 
     member this.Print() =
         printfn " --- --- --- --- --- --- --- ---"
