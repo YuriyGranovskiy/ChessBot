@@ -16,6 +16,7 @@ let main args =
     chessBoard.Print()
     game.Move("e4")
     game.Move("e5")
+    chessBoard.Print()
     game.Move("Nf3")
     game.Move("Nc6")
     game.Move("Bc4")
