@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Helpers\Notation.fs" />
         <Compile Include="Entities\Squares.fs" />
         <Compile Include="Entities\Pieces.fs" />
         <Compile Include="Entities\Board.fs" />

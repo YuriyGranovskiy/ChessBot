@@ -11,9 +11,6 @@ let main args =
     
     let game = ChessGame(chessBoard)
     
-    let description = chessBoard.DescribeSquare("d7")
-    printfn $"%s{description}"
-    chessBoard.Print()
     game.Move("e4")
     game.Move("e5")
     chessBoard.Print()

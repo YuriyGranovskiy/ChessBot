@@ -2,37 +2,29 @@ module ChessBot.Entities.Game
 
 open ChessBot.Entities.Board
 open ChessBot.Entities.Pieces
+open ChessBot.Helpers.Notation
 
 type ChessGame(board: ChessBoard) =
     
     let mutable moveNumber = 1
     let mutable currentColor = PieceColors.White
 
-    let getRankIndexByFileChar(fileChar:char) : int =        
-        let ascii = fileChar |> int 
-        if ascii >= 97 && ascii <=104 then
-            ascii - 97
-        else if ascii >= 65 && ascii <=72 then
-            ascii - 65
-        else
-            raise ( System.ArgumentException($"Improper code {fileChar}"))   
-
     member this.pawnMove(move:string, color: PieceColors) =
-        let file = getRankIndexByFileChar(move[0])
-        let rank = (move[1] |> int) - 49
+        let file = GetFileIndexByChar(move[0])
+        let rank = GetRankIndexByChar(move[1])
         if color = PieceColors.White then
             for i = rank - 2 downto 1 do
-                let pawn = this.Board.ChessSquares.[i, file].Piece
+                let pawn = this.Board.ChessSquares.[file, i].Piece
                 if pawn.IsSome then
-                    this.Board.ChessSquares.[rank, file].Piece <- pawn
-                    this.Board.ChessSquares.[i, file].Piece <- None
+                    this.Board.ChessSquares.[file, rank].Piece <- pawn
+                    this.Board.ChessSquares.[file, i].Piece <- None
                 
         else
             for i = rank to 6 do
-                let pawn = this.Board.ChessSquares.[i, rank].Piece
+                let pawn = this.Board.ChessSquares.[file, i].Piece
                 if pawn.IsSome then
-                    this.Board.ChessSquares.[rank, file].Piece <- pawn
-                    this.Board.ChessSquares.[i, rank].Piece <- None
+                    this.Board.ChessSquares.[file, rank].Piece <- pawn
+                    this.Board.ChessSquares.[file, i].Piece <- None
         
     member this.bishopMove(move:string, color: PieceColors) =
         printfn $"move the {color} bishop to {move}"

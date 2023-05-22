@@ -2,6 +2,7 @@ module ChessBot.Entities.Board
 
 open ChessBot.Entities.Pieces
 open ChessBot.Entities.Squares
+open ChessBot.Helpers.Notation
 
 type ChessSquare(square: Square) =
     let mutable piece : Option<Piece> = None
@@ -15,28 +16,12 @@ type ChessBoard() =
     
     do for r = 0 to 7 do
         for f = 0 to 7 do
-            chessSquares.[r, f] <- ChessSquare(Square(LanguagePrimitives.EnumOfValue (f + 1), LanguagePrimitives.EnumOfValue (r + 1)))
-
-    let getRankIndexByCode(code:string) : int =        
-        let ascii = code.[0] |> int 
-        if ascii >= 97 && ascii <=104 then
-            ascii - 97
-        else if ascii >= 65 && ascii <=72 then
-            ascii - 65
-        else
-            raise ( System.ArgumentException($"Improper code {code}"))
-        
-    let getFileIndexByCode(code:string) : int =
-        let ascii = code.[1] |> int 
-        if ascii >= 49 && ascii <=56 then
-            ascii - 49
-        else
-            raise ( System.ArgumentException($"Improper code {code}"))
+            chessSquares.[f, r] <- ChessSquare(Square(LanguagePrimitives.EnumOfValue (f + 1), LanguagePrimitives.EnumOfValue (r + 1)))
 
     let getLetterByPieceType(pieceType: PieceTypes, pieceColor: PieceColors) : string =
         if pieceColor = PieceColors.White then
             match pieceType with
-            | PieceTypes.Pawn -> "X"
+            | PieceTypes.Pawn -> "P"
             | PieceTypes.Knight -> "N"
             | PieceTypes.Bishop -> "B"
             | PieceTypes.Rook -> "R"
@@ -44,7 +29,7 @@ type ChessBoard() =
             | PieceTypes.King -> "K"
         else
             match pieceType with
-            | PieceTypes.Pawn -> "x"
+            | PieceTypes.Pawn -> "p"
             | PieceTypes.Knight -> "n"
             | PieceTypes.Bishop -> "b"
             | PieceTypes.Rook -> "r"
@@ -53,7 +38,7 @@ type ChessBoard() =
 
     member this.ChessSquares = chessSquares    
     member this.getChessSquareByCode(code: string):ChessSquare =
-        this.ChessSquares.[getFileIndexByCode(code), getRankIndexByCode(code)]
+        this.ChessSquares.[GetFileIndexByChar(code[0]), GetRankIndexByChar(code[1])]
 
     member this.DescribeSquare(code: string): string =
         let squareToDescribe = this.getChessSquareByCode(code)
@@ -70,7 +55,7 @@ type ChessBoard() =
         for r = 0 to 7 do
             printf "|"
             for f = 0 to 7 do
-                let piece = this.ChessSquares.[7-r, f].Piece
+                let piece = this.ChessSquares.[f, 7-r].Piece
                 let result = match piece with
                                 | Some p -> $" {getLetterByPieceType(p.PieceType, p.PieceColor)} "
                                 | None -> "   "
