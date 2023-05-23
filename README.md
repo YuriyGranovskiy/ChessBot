@@ -1,5 +1,5 @@
 # ChessBot
 
-This is a ChatBot
+This is a ChessBot
 
-The inital idea is to create a bot that will not be focused on calculations but mostly on human friendly concepts
+The initial idea is to create a bot that will not be focused on calculations but mostly on human friendly concepts
