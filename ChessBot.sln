@@ -4,6 +4,13 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ChessBot", "ChessBot\ChessB
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ChessBot.Tests", "ChessBot.Tests\ChessBot.Tests.fsproj", "{7332EAD5-0E8D-4852-BDD7-FD05A265A70A}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ChessBot.Console", "ChessBot.Console\ChessBot.Console.fsproj", "{78DA5D63-A4D8-49C7-956D-5523DEDA8F8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{7B055795-4C13-4682-8A01-F9FBE7DEBA1C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +25,9 @@ Global
 		{7332EAD5-0E8D-4852-BDD7-FD05A265A70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7332EAD5-0E8D-4852-BDD7-FD05A265A70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7332EAD5-0E8D-4852-BDD7-FD05A265A70A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78DA5D63-A4D8-49C7-956D-5523DEDA8F8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78DA5D63-A4D8-49C7-956D-5523DEDA8F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78DA5D63-A4D8-49C7-956D-5523DEDA8F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78DA5D63-A4D8-49C7-956D-5523DEDA8F8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
