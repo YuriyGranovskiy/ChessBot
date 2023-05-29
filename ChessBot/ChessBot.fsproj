@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Exceptions\ValidationExceptions.fs" />
         <Compile Include="Helpers\Notation.fs" />
         <Compile Include="Entities\Squares.fs" />
         <Compile Include="Entities\Pieces.fs" />

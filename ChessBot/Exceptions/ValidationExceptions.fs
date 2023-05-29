@@ -1,0 +1,3 @@
+module ChessBot.Exceptions.ValidationExceptions
+
+exception ImpossibleMove of string
