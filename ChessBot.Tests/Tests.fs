@@ -67,5 +67,22 @@ let ``TwoSquareBlackPawnImpossibleWithObstacleTest`` () =
     let game = ChessGame(chessboard)
     game.Move "e3"
     (fun () -> game.Move "e5") |> should throw typeof<ImpossibleMove>
-    
-    
+
+[<Fact>]
+let ``WhitePawnImpossibleTwoSquareFromNonSecondRankTest`` () =    
+    let chessboard = ChessBoard()
+    let e2Square = chessboard.GetByCode("e3")
+    e2Square.Piece <- Some (Piece(Pawn, White))
+    let game = ChessGame(chessboard)
+    (fun () -> game.Move "e5") |> should throw typeof<ImpossibleMove>
+
+[<Fact>]
+let ``BlackPawnImpossibleTwoSquareFromNonSeventhRankTest`` () =
+    let chessboard = ChessBoard()
+    let e2Square = chessboard.GetByCode("d2")
+    e2Square.Piece <- Some (Piece(Pawn, White))
+    let e2Square = chessboard.GetByCode("e6")
+    e2Square.Piece <- Some (Piece(Pawn, Black))
+    let game = ChessGame(chessboard)
+    game.Move "d3"
+    (fun () -> game.Move "e4") |> should throw typeof<ImpossibleMove>

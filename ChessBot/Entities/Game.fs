@@ -20,13 +20,18 @@ type ChessGame(board: ChessBoard) =
             | Some p -> Some square
             | _ -> None
 
+    let getValidPawnRanks(color: PieceColors, rankTo: int) =
+        match color with
+        | White -> if rankTo = 3 then List.rev [ 1 .. 2] else List.rev [ rankTo - 1 .. rankTo - 1]
+        | Black -> if rankTo = 4 then [ 5 .. 6] else [ rankTo + 1 .. rankTo + 1]
+        
     let findPawnSquareToMove(color: PieceColors, fileTo: int, rankTo: int, chessSquares: ChessSquare[,]) : ChessSquare =
-        let source = if color = PieceColors.White then List.rev [1 .. rankTo - 1] else [rankTo + 1 .. 6]
-        let chessSquare : Option<ChessSquare> =
-                                                Some (source |>
-                                                    Seq.pick(fun r  ->
-                                                        getSquareWithPiece(chessSquares.[fileTo,r])))                                                    
-        match chessSquare with
+        let source = getValidPawnRanks(color, rankTo)
+        let sourceChessSquare : Option<ChessSquare> =
+                                                source |>
+                                                    Seq.tryPick(fun r  ->
+                                                        getSquareWithPiece(chessSquares.[fileTo,r]))
+        match sourceChessSquare with
         | Some cs -> if cs.Piece.Value.PieceColor = color && cs.Piece.Value.PieceType = Pawn then
                         cs
                      else
