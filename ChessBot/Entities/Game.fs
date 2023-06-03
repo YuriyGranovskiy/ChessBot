@@ -63,6 +63,12 @@ type ChessGame(board: ChessBoard) =
                          raise <| ImpossibleMove($"Not a valid piece. Expected {cs.Piece.Value.PieceColor} {cs.Piece.Value.PieceType}")                         
         | None -> raise <| ImpossibleMove("No pawn found")
     
+    member this.MoveNumber
+        with get () = moveNumber
+
+    member this.CurrentColor
+        with get() = currentColor
+
     member this.pawnMove(move:string, color: PieceColors) =
         let file = GetFileIndexByChar move[0]
         let rank = GetRankIndexByChar move[1]

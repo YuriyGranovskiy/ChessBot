@@ -1,20 +1,20 @@
 module ChessBot.Program
 
+open ChessBot.Console.Helpers
 open ChessBot.Entities.Board
 open ChessBot.Entities.Game
-    
+open ChessBot.Entities.Pieces    
 
 [<EntryPoint>]
-let main args =
-    
-    let chessBoard = ChessBoard.Default
-    
+let main args =    
+    let chessBoard = ChessBoard.Default    
     let game = ChessGame(chessBoard)
-    
-    game.Move("e4")
-    game.Move("e5")
-    chessBoard.Print()
-    game.Move("Nf3")
-    game.Move("Nc6")
-    game.Move("Bc4")
+    printfn "Make your move"
+    while true do
+        let move = game.MoveNumber
+        if game.CurrentColor = White then printf $"\r\n{move}."
+        game.Move(ConsoleHelper.readTheMove() )
+        if game.CurrentColor = White then
+            printfn ""
+            chessBoard.Print()
     0
