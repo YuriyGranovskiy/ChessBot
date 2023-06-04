@@ -15,8 +15,7 @@ let ``A1HasWhiteRookAtStartTest`` () =
     a1Square.Piece.IsSome |> should be True
     a1Square.Piece.Value.PieceColor |> should equal White
     a1Square.Piece.Value.PieceType |> should equal Rook
-    
-    
+
 [<Fact>]
 let ``A8HasBlackRookAtStartTest`` () =
     let chessboard = ChessBoard.Default
@@ -43,8 +42,7 @@ let ``KingsPawnOpeningMovesPawnsTest`` () =
     e5Square.Piece.IsSome |> should be True
     e5Square.Piece.Value.PieceColor |> should equal Black
     e5Square.Piece.Value.PieceType |> should equal Pawn
-    
-    
+
 [<Fact>]
 let ``TwoSquareWhitePawnImpossibleWithObstacleTest`` () =
     let chessboard = ChessBoard()
@@ -54,7 +52,7 @@ let ``TwoSquareWhitePawnImpossibleWithObstacleTest`` () =
     e3Square.Piece <- Some (Piece(Bishop, White))
     let game = ChessGame(chessboard)
     (fun () -> game.Move "e4") |> should throw typeof<ImpossibleMove>
-    
+
 [<Fact>]
 let ``TwoSquareBlackPawnImpossibleWithObstacleTest`` () =    
     let chessboard = ChessBoard()
@@ -94,7 +92,7 @@ let ``KnightCanGoF3Test`` () =
     game.Move "Nf3"
     chessboard.GetByCode("g1").Piece.IsNone |> should be True
     chessboard.GetByCode("f3").Piece.IsSome |> should be True
-    
+
 [<Fact>]
 let ``TwoKnightsCantGoToTheSameSquareTest`` () =
     let chessboard = ChessBoard()
@@ -104,7 +102,7 @@ let ``TwoKnightsCantGoToTheSameSquareTest`` () =
     g3Square.Piece <- Some (Piece(Knight, White))
     let game = ChessGame(chessboard)
     (fun () -> game.Move "Ne4") |> should throw typeof<ImpossibleMove>
-    
+
 [<Fact>]
 let ``TwoKnightsOfDiffColorCanChooseProperOneToTheSameSquareTest`` () =
     let chessboard = ChessBoard()
@@ -115,3 +113,33 @@ let ``TwoKnightsOfDiffColorCanChooseProperOneToTheSameSquareTest`` () =
     let game = ChessGame(chessboard)
     game.Move "Ne4"
     c3Square.Piece.IsNone |> should be True
+
+[<Fact>]
+let ``BishopCanGoA1Test`` () =
+    let chessboard = ChessBoard()
+    let h8Square = chessboard.GetByCode("h8")
+    h8Square.Piece <- Some (Piece(Bishop, White))
+    let game = ChessGame(chessboard)
+    game.Move "Ba1"
+    chessboard.GetByCode("h8").Piece.IsNone |> should be True
+    chessboard.GetByCode("a1").Piece.IsSome |> should be True
+
+[<Fact>]
+let ``BishopCanGoA2Test`` () =
+    let chessboard = ChessBoard()
+    let g8Square = chessboard.GetByCode("g8")
+    g8Square.Piece <- Some (Piece(Bishop, White))
+    let game = ChessGame(chessboard)
+    game.Move "Ba2"
+    chessboard.GetByCode("g8").Piece.IsNone |> should be True
+    chessboard.GetByCode("a2").Piece.IsSome |> should be True
+
+[<Fact>]
+let ``BishopCanCantGoA2WithObstacleTest`` () =
+    let chessboard = ChessBoard()
+    let g8Square = chessboard.GetByCode("g8")
+    g8Square.Piece <- Some (Piece(Bishop, White))
+    let f7Square = chessboard.GetByCode("f7")
+    f7Square.Piece <- Some (Piece(Pawn, White))
+    let game = ChessGame(chessboard)
+    (fun () -> game.Move "Ba2") |> should throw typeof<ImpossibleMove>
