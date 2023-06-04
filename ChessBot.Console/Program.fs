@@ -6,7 +6,7 @@ open ChessBot.Entities.Game
 open ChessBot.Entities.Pieces    
 
 [<EntryPoint>]
-let main args =    
+let main args =
     let chessBoard = ChessBoard.Default    
     let game = ChessGame(chessBoard)
     printfn "Make your move"

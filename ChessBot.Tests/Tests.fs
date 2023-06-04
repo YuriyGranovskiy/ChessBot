@@ -143,3 +143,13 @@ let ``BishopCanCantGoA2WithObstacleTest`` () =
     f7Square.Piece <- Some (Piece(Pawn, White))
     let game = ChessGame(chessboard)
     (fun () -> game.Move "Ba2") |> should throw typeof<ImpossibleMove>
+
+[<Fact>]
+let ``BishopCanGoC4Test`` () =
+    let chessboard = ChessBoard()
+    let f1Square = chessboard.GetByCode("f1")
+    f1Square.Piece <- Some (Piece(Bishop, White))
+    let game = ChessGame(chessboard)
+    game.Move "Bc4"
+    chessboard.GetByCode("f1").Piece.IsNone |> should be True
+    chessboard.GetByCode("c4").Piece.IsSome |> should be True
