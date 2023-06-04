@@ -153,3 +153,23 @@ let ``BishopCanGoC4Test`` () =
     game.Move "Bc4"
     chessboard.GetByCode("f1").Piece.IsNone |> should be True
     chessboard.GetByCode("c4").Piece.IsSome |> should be True
+
+[<Fact>]
+let ``BishopCanGoG8Test`` () =
+    let chessboard = ChessBoard()
+    let a2Square = chessboard.GetByCode("a2")
+    a2Square.Piece <- Some (Piece(Bishop, White))
+    let game = ChessGame(chessboard)
+    game.Move "Bg8"
+    chessboard.GetByCode("a2").Piece.IsNone |> should be True
+    chessboard.GetByCode("g8").Piece.IsSome |> should be True
+
+[<Fact>]
+let ``BishopCanGoG1Test`` () =
+    let chessboard = ChessBoard()
+    let a7Square = chessboard.GetByCode("a7")
+    a7Square.Piece <- Some (Piece(Bishop, White))
+    let game = ChessGame(chessboard)
+    game.Move "Bg1"
+    chessboard.GetByCode("a7").Piece.IsNone |> should be True
+    chessboard.GetByCode("g1").Piece.IsSome |> should be True

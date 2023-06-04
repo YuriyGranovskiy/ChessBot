@@ -53,11 +53,17 @@ type ChessGame(board: ChessBoard) =
     let findBishopSquareToMove(color: PieceColors, fileTo: int, rankTo: int, chessSquares: ChessSquare[,]) : ChessSquare =
         let downLeftSource = [1..min (7 - fileTo) (7 - rankTo)]
         let upLeftSource = [1..min (7-fileTo) rankTo]
+        let downRightSource = [1..min fileTo (7 - rankTo)]
+        let upRightSource = [1..min fileTo rankTo]
         let downLeftPossibleSquares:seq<int * int> = downLeftSource |> Seq.map(fun s -> (fileTo + s, rankTo + s))
         let upLeftPossibleSquares:seq<int * int> = upLeftSource |> Seq.map(fun s -> (fileTo + s, rankTo - s))
+        let downRightPossibleSquares:seq<int * int> = downRightSource |> Seq.map(fun s -> (fileTo - s, rankTo + s))
+        let upRightPossibleSquares:seq<int * int> = upRightSource |> Seq.map(fun s -> (fileTo - s, rankTo - s))
         let downLeftSquare: Option<ChessSquare> = downLeftPossibleSquares |> Seq.tryPick(fun s -> getSquareWithPiece(chessSquares.[fst s, snd s]))
         let upLeftSquare: Option<ChessSquare> = upLeftPossibleSquares |> Seq.tryPick(fun s -> getSquareWithPiece(chessSquares.[fst s, snd s]))
-        let squares = [downLeftSquare; upLeftSquare] |> onlySome
+        let downRightSquare: Option<ChessSquare> = downRightPossibleSquares |> Seq.tryPick(fun s -> getSquareWithPiece(chessSquares.[fst s, snd s]))
+        let upRightSquare: Option<ChessSquare> = upRightPossibleSquares |> Seq.tryPick(fun s -> getSquareWithPiece(chessSquares.[fst s, snd s]))
+        let squares = [downLeftSquare; upLeftSquare; downRightSquare; upRightSquare] |> onlySome
         let bishopSquares = squares |> Seq.where(fun s -> s.Piece.Value.PieceColor = color && s.Piece.Value.PieceType = Bishop)
         if (Seq.length bishopSquares) <> 1 then raise (ImpossibleMove("Can't find proper bishop"))
         bishopSquares |> Seq.exactlyOne
