@@ -7,7 +7,7 @@ open ChessBot.Entities.Pieces
 
 [<EntryPoint>]
 let main args =
-    let chessBoard = ChessBoard.Default    
+    let chessBoard = ChessBoard.Default
     let game = ChessGame(chessBoard)
     printfn "Make your move"
     while true do
