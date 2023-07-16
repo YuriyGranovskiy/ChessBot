@@ -6,3 +6,4 @@ bin/
 TestResults/
 
 *.user
+.fake

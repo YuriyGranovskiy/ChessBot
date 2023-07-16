@@ -22,20 +22,20 @@ type ChessBoard() =
     let getLetterByPieceType(pieceType: PieceTypes, pieceColor: PieceColors) : string =
         if pieceColor = PieceColors.White then
             match pieceType with
-            | PieceTypes.Pawn -> "P"
-            | PieceTypes.Knight -> "N"
-            | PieceTypes.Bishop -> "B"
-            | PieceTypes.Rook -> "R"
-            | PieceTypes.Queen -> "Q"
-            | PieceTypes.King -> "K"
+            | Pawn -> "P"
+            | Knight -> "N"
+            | Bishop -> "B"
+            | Rook -> "R"
+            | Queen -> "Q"
+            | King -> "K"
         else
             match pieceType with
-            | PieceTypes.Pawn -> "p"
-            | PieceTypes.Knight -> "n"
-            | PieceTypes.Bishop -> "b"
-            | PieceTypes.Rook -> "r"
-            | PieceTypes.Queen -> "q"
-            | PieceTypes.King -> "k"
+            | Pawn -> "p"
+            | Knight -> "n"
+            | Bishop -> "b"
+            | Rook -> "r"
+            | Queen -> "q"
+            | King -> "k"
 
     member this.ChessSquares = chessSquares    
     member this.GetByCode(code: string):ChessSquare =
@@ -65,44 +65,48 @@ type ChessBoard() =
             printfn " --- --- --- --- --- --- --- ---"
 
     member this.ToPiecePositionsDto : PiecePositionDto[] =
-        Array.empty
+        let toArray (arr: 'T [,]) = arr |> Seq.cast<'T> |> Seq.toArray
+        this.ChessSquares
+        |> toArray
+        |> Array.filter(fun s -> s.Piece.IsSome)
+        |> Array.map(fun s -> {Color = s.Piece.Value.PieceColor; Type = s.Piece.Value.PieceType; Position = s.Square.Notation})
 
                 
 with static member Default =
         let defaultBoard = ChessBoard()
-        defaultBoard.Init("a1", Some (Piece(PieceTypes.Rook, PieceColors.White)))
-        defaultBoard.Init("b1", Some (Piece(PieceTypes.Knight, PieceColors.White)))
-        defaultBoard.Init("c1", Some (Piece(PieceTypes.Bishop, PieceColors.White)))
-        defaultBoard.Init("d1", Some (Piece(PieceTypes.Queen, PieceColors.White)))
-        defaultBoard.Init("e1", Some (Piece(PieceTypes.King, PieceColors.White)))
-        defaultBoard.Init("f1", Some (Piece(PieceTypes.Bishop, PieceColors.White)))
-        defaultBoard.Init("g1", Some (Piece(PieceTypes.Knight, PieceColors.White)))
-        defaultBoard.Init("h1", Some (Piece(PieceTypes.Rook, PieceColors.White)))
+        defaultBoard.Init("a1", Some (Piece(Rook, PieceColors.White)))
+        defaultBoard.Init("b1", Some (Piece(Knight, PieceColors.White)))
+        defaultBoard.Init("c1", Some (Piece(Bishop, PieceColors.White)))
+        defaultBoard.Init("d1", Some (Piece(Queen, PieceColors.White)))
+        defaultBoard.Init("e1", Some (Piece(King, PieceColors.White)))
+        defaultBoard.Init("f1", Some (Piece(Bishop, PieceColors.White)))
+        defaultBoard.Init("g1", Some (Piece(Knight, PieceColors.White)))
+        defaultBoard.Init("h1", Some (Piece(Rook, PieceColors.White)))
         
-        defaultBoard.Init("a2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("b2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("c2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("d2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("e2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("f2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("g2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
-        defaultBoard.Init("h2", Some (Piece(PieceTypes.Pawn, PieceColors.White)))
+        defaultBoard.Init("a2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("b2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("c2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("d2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("e2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("f2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("g2", Some (Piece(Pawn, PieceColors.White)))
+        defaultBoard.Init("h2", Some (Piece(Pawn, PieceColors.White)))
         
-        defaultBoard.Init("a8", Some (Piece(PieceTypes.Rook, PieceColors.Black)))
-        defaultBoard.Init("b8", Some (Piece(PieceTypes.Knight, PieceColors.Black)))
-        defaultBoard.Init("c8", Some (Piece(PieceTypes.Bishop, PieceColors.Black)))
-        defaultBoard.Init("d8", Some (Piece(PieceTypes.Queen, PieceColors.Black)))
-        defaultBoard.Init("e8", Some (Piece(PieceTypes.King, PieceColors.Black)))
-        defaultBoard.Init("f8", Some (Piece(PieceTypes.Bishop, PieceColors.Black)))
-        defaultBoard.Init("g8", Some (Piece(PieceTypes.Knight, PieceColors.Black)))
-        defaultBoard.Init("h8", Some (Piece(PieceTypes.Rook, PieceColors.Black)))
+        defaultBoard.Init("a8", Some (Piece(Rook, PieceColors.Black)))
+        defaultBoard.Init("b8", Some (Piece(Knight, PieceColors.Black)))
+        defaultBoard.Init("c8", Some (Piece(Bishop, PieceColors.Black)))
+        defaultBoard.Init("d8", Some (Piece(Queen, PieceColors.Black)))
+        defaultBoard.Init("e8", Some (Piece(King, PieceColors.Black)))
+        defaultBoard.Init("f8", Some (Piece(Bishop, PieceColors.Black)))
+        defaultBoard.Init("g8", Some (Piece(Knight, PieceColors.Black)))
+        defaultBoard.Init("h8", Some (Piece(Rook, PieceColors.Black)))
         
-        defaultBoard.Init("a7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("b7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("c7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("d7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("e7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("f7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("g7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
-        defaultBoard.Init("h7", Some (Piece(PieceTypes.Pawn, PieceColors.Black)))
+        defaultBoard.Init("a7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("b7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("c7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("d7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("e7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("f7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("g7", Some (Piece(Pawn, PieceColors.Black)))
+        defaultBoard.Init("h7", Some (Piece(Pawn, PieceColors.Black)))
         defaultBoard

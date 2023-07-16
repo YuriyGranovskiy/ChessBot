@@ -31,6 +31,9 @@ type Square(file: File, rank : Rank) =
     
     member this.Color =
         if (LanguagePrimitives.EnumToValue this.Rank % 2) = (LanguagePrimitives.EnumToValue this.File % 2) then
-            SquareColor.Black
+            Black
         else
-            SquareColor.White
+            White
+
+    member this.Notation =
+        $"{this.File}{LanguagePrimitives.EnumToValue this.Rank}".ToLower()

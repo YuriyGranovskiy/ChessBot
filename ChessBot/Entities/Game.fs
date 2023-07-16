@@ -88,7 +88,7 @@ type ChessGame(board: ChessBoard) =
         with get() = currentColor
 
     member this.ToDto() : GameDto = 
-        {Move = this.MoveNumber ; CurrentColorMove = this.CurrentColor; PiecePositions = Array.empty<PiecePositionDto>}
+        {Move = this.MoveNumber ; CurrentColorMove = this.CurrentColor; PiecePositions = this.Board.ToPiecePositionsDto}
 
     member this.pawnMove(move:string, color: PieceColors) =
         let file = GetFileIndexByChar move[0]
