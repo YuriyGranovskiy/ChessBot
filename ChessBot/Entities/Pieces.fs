@@ -1,16 +1,6 @@
 module ChessBot.Entities.Pieces
 
-type PieceColors =
-    | White
-    | Black
-
-type PieceTypes =
-    | Pawn
-    | Knight
-    | Bishop
-    | Rook
-    | Queen
-    | King
+open ChessBot.DTO.Dto
 
 type Piece(pieceType : PieceTypes, pieceColor : PieceColors) =
     member this.PieceType = pieceType

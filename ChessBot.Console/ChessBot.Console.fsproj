@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ChessBot\ChessBot.fsproj" />
+      <ProjectReference Include="..\ChessBot.DTO\ChessBot.DTO.fsproj" />
     </ItemGroup>
 
 </Project>

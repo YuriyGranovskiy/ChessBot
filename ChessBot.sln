@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionF
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ChessBot.API", "ChessBot.API\ChessBot.API.fsproj", "{6AD52A4E-A9BD-42A3-833E-25406DC9536D}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ChessBot.DTO", "ChessBot.DTO\ChessBot.DTO.fsproj", "{4719453E-E073-4F07-A121-CE1F1BB579DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 		{6AD52A4E-A9BD-42A3-833E-25406DC9536D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD52A4E-A9BD-42A3-833E-25406DC9536D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AD52A4E-A9BD-42A3-833E-25406DC9536D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4719453E-E073-4F07-A121-CE1F1BB579DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4719453E-E073-4F07-A121-CE1F1BB579DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4719453E-E073-4F07-A121-CE1F1BB579DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4719453E-E073-4F07-A121-CE1F1BB579DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

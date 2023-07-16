@@ -1,9 +1,10 @@
 module ChessBot.Program
 
+open ChessBot.DTO.Dto
 open ChessBot.Console.Helpers
 open ChessBot.Entities.Board
 open ChessBot.Entities.Game
-open ChessBot.Entities.Pieces    
+ 
 
 [<EntryPoint>]
 let main args =

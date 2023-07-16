@@ -1,5 +1,6 @@
 module ChessBot.Entities.Board
 
+open ChessBot.DTO.Dto
 open ChessBot.Entities.Pieces
 open ChessBot.Entities.Squares
 open ChessBot.Helpers.Notation
@@ -62,6 +63,10 @@ type ChessBoard() =
                 printf $"{result}|"
             printfn ""
             printfn " --- --- --- --- --- --- --- ---"
+
+    member this.ToPiecePositionsDto : PiecePositionDto[] =
+        Array.empty
+
                 
 with static member Default =
         let defaultBoard = ChessBoard()

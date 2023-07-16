@@ -1,5 +1,6 @@
 module Tests
 
+open ChessBot.DTO.Dto
 open ChessBot.Entities.Game
 open ChessBot.Entities.Board
 open ChessBot.Entities.Pieces

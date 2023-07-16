@@ -1,7 +1,7 @@
 module ChessBot.Entities.Game
 
+open ChessBot.DTO.Dto
 open ChessBot.Entities.Board
-open ChessBot.Entities.Pieces
 open ChessBot.Exceptions.ValidationExceptions
 open ChessBot.Helpers.Notation
 open ChessBot.Utils.SequenceUtils
@@ -86,6 +86,9 @@ type ChessGame(board: ChessBoard) =
 
     member this.CurrentColor
         with get() = currentColor
+
+    member this.ToDto() : GameDto = 
+        {Move = this.MoveNumber ; CurrentColorMove = this.CurrentColor; PiecePositions = Array.empty<PiecePositionDto>}
 
     member this.pawnMove(move:string, color: PieceColors) =
         let file = GetFileIndexByChar move[0]

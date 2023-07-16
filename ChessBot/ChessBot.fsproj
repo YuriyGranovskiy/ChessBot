@@ -14,4 +14,8 @@
         <Compile Include="Entities\Game.fs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ChessBot.DTO\ChessBot.DTO.fsproj" />
+    </ItemGroup>
+
 </Project>

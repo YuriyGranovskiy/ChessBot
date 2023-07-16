@@ -2,6 +2,8 @@ namespace ChessBot.API.Controllers
 
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
+
+open ChessBot.DTO.Dto
 open ChessBot.Entities.Board
 open ChessBot.Entities.Game
 
@@ -14,4 +16,5 @@ type GameController (logger : ILogger<GameController>) =
     member _.Get() =
         let chessBoard = ChessBoard.Default
         let game = ChessGame(chessBoard)
-        $"Move number: {game.MoveNumber}"
+        let gameDto : GameDto = game.ToDto()
+        gameDto
